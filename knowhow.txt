@@ -1,0 +1,45 @@
+POSTGRES 101
+
+General
+- Both databases and schemas are collections of objects like tables, data types, functions or operators
+- Databases cannot share objects among users
+- Schemas can share objects among users
+- Users can access the database cluster using different authentication methods; in Postgres users and roles are synonyms
+- A privilege is a right that can be granted to a user for an object, e.g. database; the privilege can also be revoked. Possible privileges are: SELECT, INSERT, UPDATE, DELETE, TRUNCATE, ...
+- Any object can have an owner; in the context of a database the owner gets all privileges by default. Any other access is controlled using privileges
+
+Authentication
+Postgres uses a configuration to allow access to the database cluster. The access rights are defined in a rule table. Once an access matches a row in the table the rule is evaluated. Access is granted if the rule evaluates to true, otherwise access is denied. No further rules are evaluated.
+
+A rule consists of the following properties
+- Type: E.g. local for access from a Unix domain-sockets or host for TCP/IP connections
+- Database: Databases that are accessed
+- User: Database user that wants to authenticate
+- Address: IP-address patterns 
+- Method: E.g. peer to rely on OS, md5 for password authentication
+
+On Ubuntu Linux the configuration file is located at /etc/postgresql/<some-version>/main/pg_hba.conf
+
+See also https://www.postgresql.org/docs/current/static/auth-pg-hba-conf.html
+
+Database management
+
+There are command-line tools that facilitate the interaction with the database cluster:
+- createdb <db-name>: Creates a new database
+- dropdb <db-name>: Drops an existing database
+- pg_dump or pg_dump <db-name>: Dumps a database cluster or a selected database
+- createuser <user-name>: Creates a new user
+- createuser <user-name> -P: Creates a new user and asks for the inital password
+- dropuser <user-name>: Drops an existing user
+
+Privileges
+A superuser or the owner of an object can manage privileges to a object for another user using GRANT and REVOKE.
+
+See also https://www.postgresql.org/docs/current/static/sql-grant.html
+
+Useful console commands
+\l:  List databases including ownership and privileges
+\du: List users
+\dp: List privileges of the currently logged in user
+\dt: List tables
+\dn: List namespace / schema
