@@ -1,4 +1,6 @@
+-----------------------------------------------------
 POSTGRES 101
+-----------------------------------------------------
 
 General
 - Both databases and schemas are collections of objects like tables, data types, functions or operators
