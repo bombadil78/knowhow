@@ -25,7 +25,6 @@ On Ubuntu Linux the configuration file is located at /etc/postgresql/<some-versi
 See also https://www.postgresql.org/docs/current/static/auth-pg-hba-conf.html
 
 Database management
-
 There are command-line tools that facilitate the interaction with the database cluster:
 - createdb <db-name>: Creates a new database
 - dropdb <db-name>: Drops an existing database
