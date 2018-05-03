@@ -26,7 +26,8 @@ See also https://www.postgresql.org/docs/current/static/auth-pg-hba-conf.html
 
 Database management
 There are command-line tools that facilitate the interaction with the database cluster:
-- createdb <db-name>: Creates a new database
+- createdb <db-name>: Creates a new database with the current user as owner
+- createdb -O <other-user> <db-name>: Creates a new database with the given user as owner
 - dropdb <db-name>: Drops an existing database
 - pg_dump or pg_dump <db-name>: Dumps a database cluster or a selected database
 - createuser <user-name>: Creates a new user
@@ -44,3 +45,69 @@ Useful console commands
 \dp: List privileges of the currently logged in user
 \dt: List tables
 \dn: List namespace / schema
+
+-----------------------------------------------------
+MERGING WITH GIT
+-----------------------------------------------------
+General cases
+- fast-forward: Merging of two branches while one branch fully contains the other. This will forward the HEAD pointer of the branch contained in the other branch to the HEAD of the containing branch. This merge is only possible if there are no conflicts.
+- 3-way merge: Merging of two branches while no branch fully contains the other; there is a common ancestor from which on the histories of the two branches diverge. Depending on
+
+There are different merging strategies:
+- recursive: Default strategy for exactly 2 heads
+- octopus: Default strategy for >= 2 heads
+- ours: >= 2 heads, but always favors the branch that is merged into (e.g. merge outdated branches)
+- subtree
+
+Conflict presentation
+<<<<<<< branch-to-merge-into
+some-local-data
+=======
+>>>>>>> branch-to-merge-from
+some-remote-data
+
+Conflict resolution is done using a merge tool. The merge tool can be configured using 'git config --global merge.tool <some-tool>'
+
+Merging configuration options
+--commit: Automatically introduce a merge-commit if the merge succeeds
+--no-commit: Similar to a failing merge. The user can further inspect the merge result and must commit manually.
+--ff: Fast-forward if possible, otherwise introduce a merge-commit
+--no-ff:  Never fast-forward, always introduce a merge-commit
+--ff-only: Only accept fast-forward merges (or the status is already up-to-date)
+--squash: Squash all the history of the branched that is merged into the current branch together
+
+Rebasing
+
+1) Before
+
+  ___ b1
+ /
+a 
+ \
+  --- b2
+
+2) git rebase b1 (on branch b2)
+
+3) After
+
+a --- b1 --- b2
+
+-----------------------------------------------------
+Spring Boot Testing Support
+-----------------------------------------------------
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigure
+@TestPropertySource
+
+Different slices that can be tested are
+- Full server stack (with or without servlet part)
+- JSON serialization / deserialization
+- Data repositories
+-
+
+-----------------------------------------------------
+Spring REST Client
+-----------------------------------------------------
+
