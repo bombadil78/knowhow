@@ -93,21 +93,13 @@ a
 a --- b1 --- b2
 
 -----------------------------------------------------
-Spring Boot Testing Support
+POSTGRES JSON DATA TYPE
 -----------------------------------------------------
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigure
-@TestPropertySource
-
-Different slices that can be tested are
-- Full server stack (with or without servlet part)
-- JSON serialization / deserialization
-- Data repositories
--
-
------------------------------------------------------
-Spring REST Client
------------------------------------------------------
+- Syntax
+- Features
+  * Selection / Navigation
+  * Containment
+  * ...
+  
 
